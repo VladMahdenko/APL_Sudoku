@@ -1,0 +1,22 @@
+board: <%= @board %>
+res: <%= @res %>
+right: <%= @right %>
+<%= form_with url: generate_url, method: "post" do |form| %>
+  <table>
+    <% (1..9).each do |i| %>
+      <tr>
+        <% (1..9).each do |j| %>
+          <%if @board[(i-1)*9+j-1]!=["0"] %>
+            <td><%= form.number_field :"#{i}#{j}", value: @board[(i-1)*9+j-1], in: 1..9, step: 1 %></td>
+          <% else %>
+            <td><%= form.number_field :"#{i}#{j}", in: 1..9, step: 1 %></td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <%= form.submit "Generate" %>
+  <%= form.submit "Solve", formaction: solve_url %>
+  <%= form.submit "Check", formaction: check_url %>
+<% end  %>
+
