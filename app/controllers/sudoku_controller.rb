@@ -33,8 +33,11 @@ class SudokuController < ApplicationController
       end
       board << row
     end
-    right = SudokuSolver.is_right_solution?(board)
-    redirect_to action: "index", board: board, right: right
+
+    if !SudokuSolver.contains_zero?(board)
+      right = SudokuSolver.is_right_solution?(board)
+      redirect_to action: "index", board: board, right: right
+    end
   end
 
   private
