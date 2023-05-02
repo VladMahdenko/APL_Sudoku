@@ -4,17 +4,26 @@
 <h1 align="center">Sudoku</h1>
   <div align="center">
     <%= form_with url: generate_url, method: "post" do |form| %>
-      <table>
+      <table   cellpadding= "10" rules = groups>
+        <COLGROUP span = 3>
+        <COLGROUP span = 3 bgcolor = #e0e0e0>
+        <COLGROUP span = 3>
         <% (1..9).each do |i| %>
-          <tr>
-            <% (1..9).each do |j| %>
-              <%if @board[(i-1)*9+j-1]!=["0"] %>
-                <td><%= form.number_field :"#{i}#{j}", style: 'background:#FFE4C4; width:40px; text-align:right; font-size:15px' , value: @board[(i-1)*9+j-1], in: 1..9, step: 1, readonly: true%></td>
-              <% else %>
-                <td><%= form.number_field :"#{i}#{j}", style: 'width:40px; text-align:right; font-size:15px', in: 1..9, step: 1 %></td>
+          <%if (i == 4) || (i == 5) || (i == 6) %>
+            <tbody bgcolor = #e0e0e0>
+          <% end %>
+              <tr>
+              <% (1..9).each do |j| %>
+                <%if @board[(i-1)*9+j-1]!=["0"] %>
+                  <td><%= form.number_field :"#{i}#{j}", style: 'background:#FFE4C4; width:40px; text-align:right; font-size:15px' , value: @board[(i-1)*9+j-1], in: 1..9, step: 1, readonly: true%></td>
+                <% else %>
+                  <td><%= form.number_field :"#{i}#{j}", style: 'width:40px; text-align:right; font-size:15px', in: 1..9, step: 1 %></td>
+                <% end %>
               <% end %>
-            <% end %>
-          </tr>
+            </tr>
+          <%if (i == 4) || (i == 5) || (i == 6) %>
+            </tbody>
+          <% end %>
         <% end %>
       </table>
       <br>
