@@ -1,22 +1,41 @@
-board: <%= @board %>
-res: <%= @res %>
-right: <%= @right %>
-<%= form_with url: generate_url, method: "post" do |form| %>
-  <table>
-    <% (1..9).each do |i| %>
-      <tr>
-        <% (1..9).each do |j| %>
-          <%if @board[(i-1)*9+j-1]!=["0"] %>
-            <td><%= form.number_field :"#{i}#{j}", value: @board[(i-1)*9+j-1], in: 1..9, step: 1 %></td>
-          <% else %>
-            <td><%= form.number_field :"#{i}#{j}", in: 1..9, step: 1 %></td>
-          <% end %>
+<!DOCTYPE html>
+<html>
+<body>
+<h1 align="center">Sudoku</h1>
+  <div align="center">
+    <%= form_with url: generate_url, method: "post" do |form| %>
+      <table>
+        <% (1..9).each do |i| %>
+          <tr>
+            <% (1..9).each do |j| %>
+              <%if @board[(i-1)*9+j-1]!=["0"] %>
+                <td><%= form.number_field :"#{i}#{j}", style: 'background:#FFE4C4; width:40px; text-align:right; font-size:15px' , value: @board[(i-1)*9+j-1], in: 1..9, step: 1, readonly: true%></td>
+              <% else %>
+                <td><%= form.number_field :"#{i}#{j}", style: 'width:40px; text-align:right; font-size:15px', in: 1..9, step: 1 %></td>
+              <% end %>
+            <% end %>
+          </tr>
         <% end %>
-      </tr>
+      </table>
+      <br>
+      <%= form.submit "Generate", style: 'background:#F4A460; width:80px; text-align:center; font-weight:bold; font-size:15px' %>
+      <%= form.submit "Solve", formaction: solve_url, style: 'background:#F4A460; width:80px; text-align:center; font-weight:bold; font-size:15px' %>
+      <%= form.submit "Check", formaction: check_url, style: 'background:#F4A460; width:80px; text-align:center; font-weight:bold; font-size:15px' %>
     <% end %>
-  </table>
-  <%= form.submit "Generate" %>
-  <%= form.submit "Solve", formaction: solve_url %>
-  <%= form.submit "Check", formaction: check_url %>
-<% end  %>
+    <h5>*Перевірити результат (check) можна лише якщо поле повністю заповнене</h5>
+    <br>
+    <% if @res == 'true' %>
+      <h3>Поле заповнено правильно</h3>
+    <% elsif @res == 'false'%>
+      <h3>Програма не може заповнити поле, так як деякі значення вказані неправильно</h3>
+    <% end %>
 
+    <% if @right == 'true' %>
+      <h3>Поле заповнено правильно</h3>
+    <% elsif @right == 'false'%>
+      <h3>Поле заповнено неправильно</h3>
+    <% end %>
+    <h2></h2>
+  </div>
+</body>
+</html>

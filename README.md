@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+Гра "Судоку"
 
-* Ruby version
+Виконали студенти групи КС-33: 
 
-* System dependencies
+* Вайда Олена
 
-* Configuration
+* Магденко Владислав
 
-* Database creation
+* Степанова Анастасія
 
-* Database initialization
 
-* How to run the test suite
+Правила:
 
-* Services (job queues, cache servers, search engines, etc.)
+Заповнити поле 9х9 цифрами від 1 до 9 так, щоб вони не повторювалися по вертикалі, горизонталі, та відділах 3х3.
 
-* Deployment instructions
-
-* ...
+Функціонал кнопок:
+* Generate - початок гри, отримання поля, котре потрібно вирішити
+* Solve - автоматичне заповнення поля враховуючи внесені зміни
+* Check - перевірка на правильність заповненого поля
